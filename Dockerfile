@@ -19,7 +19,7 @@ RUN npm install
 RUN rm -rf build
 RUN npm run build
 # If you are building your code for production
-# RUN npm ci --only=production
+RUN npm ci --only=production
 
 # Bundle app source
 COPY . .
