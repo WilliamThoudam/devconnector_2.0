@@ -24,7 +24,7 @@ const CommentItem = ({
       </Link>
     </div>
     <div>
-    {commentEdit && commentEdit.is_edit && commentEdit.edit_id == _id ? (
+    {commentEdit && commentEdit.is_edit && commentEdit.edit_id === _id ? (
           <Fragment>
             <form className="form" style={{display: "flex"}} onSubmit={e => {
           e.preventDefault();

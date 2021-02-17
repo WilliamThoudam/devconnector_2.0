@@ -28,7 +28,7 @@ const PostItem = ({
       </Link>
     </div>
     <div>
-      {showEditForm && postEdit && postEdit.is_edit && postEdit.edit_id == _id ? (
+      {showEditForm && postEdit && postEdit.is_edit && postEdit.edit_id === _id ? (
           <Fragment>
             <form className="form" style={{display: "flex"}} onSubmit={e => {
           e.preventDefault();
