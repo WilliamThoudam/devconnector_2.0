@@ -45,7 +45,7 @@ router.post(
 // @access   Private
 router.get('/', auth, async (req, res) => {
   try {
-    const posts = await Post.find().sort({ date: -1 });
+    const posts = await Post.find().sort({ createdAt: -1 });
     res.json(posts);
   } catch (err) {
     console.error(err.message);
@@ -123,9 +123,7 @@ router.patch(
     }
 
     // destructure the request
-    const {
-      text
-    } = req.body;
+    const { text } = req.body;
 
     // build a post
     const postFields = {
@@ -266,13 +264,13 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
   }
 });
 
-
 // @route    UPDATE api/posts/comment/:id/:comment_id
 // @desc     Update comment
 // @access   Private
-router.patch('/comment/:id/:comment_id',
-[auth, checkObjectId('id'), checkObjectId('comment_id')],
-check('text', 'Text is required').not().isEmpty(),
+router.patch(
+  '/comment/:id/:comment_id',
+  [auth, checkObjectId('id'), checkObjectId('comment_id')],
+  check('text', 'Text is required').not().isEmpty(),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -296,33 +294,39 @@ check('text', 'Text is required').not().isEmpty(),
     }
 
     // destructure the request
-    const {text} = req.body;
+    const { text } = req.body;
 
-try{
-    // Update particular comment in the post
-    const updatedPost = await Post.findOneAndUpdate({
-      _id: req.params.id,
-      comments: {
-          $elemMatch: {
+    try {
+      // Update particular comment in the post
+      const updatedPost = await Post.findOneAndUpdate(
+        {
+          _id: req.params.id,
+          comments: {
+            $elemMatch: {
               _id: req.params.comment_id
+            }
           }
-      }
-  }, {
-      $set: {
-          'comments.$.text': text
-      }
-  }, {new: true});
+        },
+        {
+          $set: {
+            'comments.$.text': text,
+            'comments.$.updatedAt': new Date()
+          }
+        },
+        { new: true }
+      );
 
-  // pull out updated comment only
-  const updatedComment = updatedPost.comments.filter(
-      ({ id }) => id === req.params.comment_id
-    );
+      // pull out updated comment only
+      const updatedComment = updatedPost.comments.filter(
+        ({ id }) => id === req.params.comment_id
+      );
 
-    return res.json(updatedComment[0]);
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).send('Server Error');
+      return res.json(updatedComment[0]);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).send('Server Error');
+    }
   }
-});
+);
 
 module.exports = router;

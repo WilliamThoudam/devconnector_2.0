@@ -8,10 +8,16 @@ const Navbar = ({ auth: { isAuthenticated }, logout }) => {
   const authLinks = (
     <ul>
       <li>
-        <Link to="/profiles">Developers</Link>
+        <Link to="/profiles">Users</Link>
       </li>
       <li>
         <Link to="/posts">Posts</Link>
+      </li>
+      <li>
+        <Link to="/chatrooms">Chat Rooms</Link>
+      </li>
+      <li>
+        <Link to="/chat">Message</Link>
       </li>
       <li>
         <Link to="/dashboard">
@@ -31,7 +37,7 @@ const Navbar = ({ auth: { isAuthenticated }, logout }) => {
   const guestLinks = (
     <ul>
       <li>
-        <Link to="/profiles">Developers</Link>
+        <Link to="/profiles">Users</Link>
       </li>
       <li>
         <Link to="/register">Register</Link>
@@ -41,12 +47,11 @@ const Navbar = ({ auth: { isAuthenticated }, logout }) => {
       </li>
     </ul>
   );
-
   return (
     <nav className="navbar bg-dark">
       <h1>
         <Link to="/">
-          <i className="fas fa-code" /> DevConnector
+          <i className="fas fa-code" /> SocialMedia
         </Link>
       </h1>
       <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>

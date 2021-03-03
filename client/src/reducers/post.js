@@ -16,6 +16,8 @@ import {
 const initialState = {
   posts: [],
   post: null,
+  edit_post: {},
+  edit_comment: {},
   loading: true,
   error: {}
 };
@@ -48,17 +50,19 @@ function postReducer(state = initialState, action) {
         posts: state.posts.filter((post) => post._id !== payload),
         loading: false
       };
-      case EDIT_POST:
+    case EDIT_POST:
       return {
         ...state,
-        edit_post: {is_edit:true,edit_id:payload},
+        edit_post: { is_edit: true, edit_id: payload },
         loading: false
       };
-      case UPDATE_POST:
+    case UPDATE_POST:
       return {
         ...state,
-        edit_post: {is_edit:false,edit_id:''},
-        posts: state.posts.map(post=>post._id !== payload._id ? post : payload),
+        edit_post: { is_edit: false, edit_id: '' },
+        posts: state.posts.map((post) =>
+          post._id !== payload._id ? post : payload
+        ),
         loading: false
       };
     case POST_ERROR:
@@ -92,20 +96,20 @@ function postReducer(state = initialState, action) {
         },
         loading: false
       };
-      case EDIT_COMMENT:
+    case EDIT_COMMENT:
       return {
         ...state,
-        edit_comment: {is_edit:true,edit_id:payload},
+        edit_comment: { is_edit: true, edit_id: payload },
         loading: false
       };
-      case UPDATE_COMMENT:
+    case UPDATE_COMMENT:
       return {
         ...state,
-        edit_comment: {is_edit:false,edit_id:''},
+        edit_comment: { is_edit: false, edit_id: '' },
         post: {
-        ...state.post,
-        comments: state.post.comments.map(
-          comment=>comment._id !== payload._id ? comment : payload
+          ...state.post,
+          comments: state.post.comments.map((comment) =>
+            comment._id !== payload._id ? comment : payload
           )
         },
         loading: false

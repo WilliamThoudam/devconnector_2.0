@@ -13,8 +13,11 @@ import Posts from '../posts/Posts';
 import Post from '../post/Post';
 import NotFound from '../layout/NotFound';
 import PrivateRoute from '../routing/PrivateRoute';
+import Chat from '../chat/Chat';
+import Chatrooms from '../chatrooms/Chatrooms';
+import Chatroom from '../chatroom/Chatroom';
 
-const Routes = props => {
+const Routes = (props) => {
   return (
     <section className="container">
       <Alert />
@@ -30,6 +33,9 @@ const Routes = props => {
         <PrivateRoute exact path="/add-education" component={AddEducation} />
         <PrivateRoute exact path="/posts" component={Posts} />
         <PrivateRoute exact path="/posts/:id" component={Post} />
+        <PrivateRoute exact path="/chat" component={Chat} />
+        <PrivateRoute exact path="/chatrooms" component={Chatrooms} />
+        <PrivateRoute exact path="/chatrooms/:id" component={Chatroom} />
         <Route component={NotFound} />
       </Switch>
     </section>

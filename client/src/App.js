@@ -10,8 +10,11 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
-
 import './App.css';
+
+//import SocketContext from './socket-context';
+//import io from 'socket.io-client';
+//import { connectSocket } from './actions/socket';
 
 const App = () => {
   useEffect(() => {
@@ -20,6 +23,7 @@ const App = () => {
       setAuthToken(localStorage.token);
     }
     store.dispatch(loadUser());
+    //connectSocket();
 
     // log user out from all tabs if they log out in one tab
     window.addEventListener('storage', () => {

@@ -54,6 +54,14 @@ const ProfileSchema = new mongoose.Schema({
       },
       description: {
         type: String
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now
+      },
+      updatedAt: {
+        type: Date,
+        default: Date.now
       }
     }
   ],
@@ -84,6 +92,14 @@ const ProfileSchema = new mongoose.Schema({
       },
       description: {
         type: String
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now
+      },
+      updatedAt: {
+        type: Date,
+        default: Date.now
       }
     }
   ],
@@ -103,11 +119,7 @@ const ProfileSchema = new mongoose.Schema({
     instagram: {
       type: String
     }
-  },
-  date: {
-    type: Date,
-    default: Date.now
   }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('profile', ProfileSchema);
