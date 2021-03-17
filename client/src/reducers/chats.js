@@ -15,7 +15,7 @@ const initialState = {
   error: {}
 };
 
-function chatsReducer(state = initialState, action) {
+const chatsReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -54,6 +54,6 @@ function chatsReducer(state = initialState, action) {
     default:
       return state;
   }
-}
+};
 
 export default chatsReducer;

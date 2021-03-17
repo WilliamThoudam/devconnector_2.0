@@ -4,9 +4,6 @@ const socket = require('./routes/api/socket');
 const path = require('path');
 require('dotenv/config');
 
-const jwt = require('jsonwebtoken');
-const config = require('config');
-
 const app = express();
 app.use(require('cors')());
 const server = require('http').createServer(app);
